@@ -5,7 +5,7 @@ const GalleryItem = ({ data }) => {
         border: "1px solid #ccc",
         margin: "10px",
         padding: "10px",
-        textAlign: "center"
+        textAlign: "center",
       }}
     >
       <img
@@ -14,6 +14,8 @@ const GalleryItem = ({ data }) => {
         style={{ width: "100px", height: "100px", borderRadius: "50%" }}
       />
       <p style={{ margin: "5px", fontSize: "14px" }}>{data.name}</p>
+      <p style={{ margin: "5px", fontSize: "14px" }}>{data.location}</p>
+      <p style={{ margin: "5px", fontSize: "14px" }}>{data.email}</p>
     </div>
   );
 };

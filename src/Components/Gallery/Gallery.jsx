@@ -11,14 +11,16 @@ const Gallery = () => {
 
     try {
       const response = await fetch(
-        `https://randomuser.me/api/?results=5&page=${page}`
+        `https://randomuser.me/api/?results=5&page=${page}`,
       );
       const data = await response.json();
 
       const newItems = data.results.map((result) => ({
         id: result.login.uuid,
         name: `${result.name.first} ${result.name.last}`,
-        picture: result.picture.large
+        picture: result.picture.large,
+        location: `${result.location.city}, ${result.location.state}, ${result.location.country}`,
+        email: result.email,
       }));
 
       setItems([...items, ...newItems]);
@@ -32,15 +34,13 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchMoreItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const {
-        scrollTop,
-        clientHeight,
-        scrollHeight
-      } = document.documentElement;
+      const { scrollTop, clientHeight, scrollHeight } =
+        document.documentElement;
 
       if (scrollTop + clientHeight >= scrollHeight - 20 && !loading) {
         fetchMoreItems();
@@ -53,6 +53,7 @@ const Gallery = () => {
     };
   }, [loading]);
 
+  console.log(items);
   return (
     <div>
       {items.map((item) => (
